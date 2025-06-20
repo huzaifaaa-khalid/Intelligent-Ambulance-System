@@ -164,6 +164,7 @@ public class MediRouteService {
         System.out.println("Location: " + selectedHospital.getLocation());
         System.out.println("Type: " + selectedHospital.getType());
         System.out.println("Distance: " + finalDistance + " km");
+        simulateAmbulanceMovement("Patient", selectedHospital.getLocation(), finalDistance);
         System.out.println("Route calculated in: " + timeTaken + " ms");
 
         int total = 0;
@@ -186,6 +187,48 @@ public class MediRouteService {
         }
 
         savePatientRecord(name, diseaseCategory.name(), selectedHospital, total, billBreakdown);
+    }
+
+    private void simulateAmbulanceMovement(String from, String to, int distance) {
+        System.out.println("\n🚑 Ambulance dispatched from " + from + " to " + to);
+        System.out.println("📍 Total distance: " + distance + " km");
+        System.out.println("🕒 Estimated arrival time: ~" + distance + " minutes (1 km/min speed)\n");
+        System.out.println("Tracking ambulance movement...");
+        System.out.println("--------------------------------------------------");
+
+        int progress = 0;
+        Random random = new Random();
+
+        while (progress < distance) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            int step = random.nextInt(3, 6);
+            int trafficDelayChance = random.nextInt(100);
+
+            if (trafficDelayChance < 20) {
+                System.out.println("🛑 Traffic delay encountered... waiting...");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            progress = Math.min(progress + step, distance);
+
+            int percent = (progress * 100) / distance;
+            int bars = percent / 5;
+            String bar = "[🚑" + "-".repeat(bars) + ">" + " ".repeat(20 - bars) + "] ";
+
+            System.out.println(bar + progress + " km completed (ETA: " + (distance - progress) + " min)");
+        }
+
+        System.out.println("\n✅ Ambulance has arrived at " + to);
+        System.out.println("🏁 Total distance: " + distance + " km\n");
     }
 
     private void savePatientRecord(String name, String disease, Hospital hospital, int total, String breakdown) {
@@ -257,7 +300,42 @@ public class MediRouteService {
                 System.out.println("Records deleted.");
                 break;
             case "4":
-                System.out.println("❗ Update feature coming soon.");
+                System.out.println("Enter patient name to update:");
+                String updateName = scanner.nextLine();
+                File inFile = new File(RECORD_FILE);
+                File tempFileUpdate = new File("temp_records_update.txt");
+                boolean updated = false;
+
+                try (BufferedReader reader = new BufferedReader(new FileReader(inFile));
+                     BufferedWriter writer = new BufferedWriter(new FileWriter(tempFileUpdate))) {
+
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.toLowerCase().contains(updateName.toLowerCase())) {
+                            System.out.println("Current Record: " + line);
+                            System.out.println("Enter updated disease:");
+                            String newDisease = scanner.nextLine().toUpperCase();
+
+                            line = line.replaceAll("(\\| Disease: )(.*?)( \\|)", "$1" + newDisease + "$3");
+                            System.out.println("Updated Record: " + line);
+                            updated = true;
+                        }
+                        writer.write(line);
+                        writer.newLine();
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error updating record: " + e.getMessage());
+                    return;
+                }
+
+                if (updated) {
+                    inFile.delete();
+                    tempFileUpdate.renameTo(inFile);
+                    System.out.println("✅ Record updated successfully.");
+                } else {
+                    tempFileUpdate.delete();
+                    System.out.println("❌ No matching record found to update.");
+                }
                 break;
             default: System.out.println("Invalid option.");
         }
