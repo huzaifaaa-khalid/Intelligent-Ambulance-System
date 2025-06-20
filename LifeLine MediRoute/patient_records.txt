@@ -1,0 +1,5 @@
+21-06-2025 01:35:35 | Patient: Ahmed | Disease: CARDIAC | Hospital: Aga Khan University Hospital (AKUH) | Type: Private | Bill: Rs 100079 (1 Lakh) | Consultation: Rs 10437, Tests: Rs 23606, Treatment: Rs 66036
+21-06-2025 01:43:05 | Patient: Shaheer | Disease: DIABETES | Hospital: Aga Khan University Hospital (AKUH) | Type: Private | Bill: Rs 86458 (86 Thousand) | Consultation: Rs 5451, Tests: Rs 26184, Treatment: Rs 54823
+21-06-2025 02:02:49 | Patient: Huzaifa | Disease: NEUROLOGY | Hospital: Aga Khan University Hospital (AKUH) | Type: Private | Bill: Rs 147889 (1 Lakh, 47 Thousand) | Consultation: Rs 11164, Tests: Rs 27540, Treatment: Rs 109185
+21-06-2025 02:03:34 | Patient: Zain | Disease: LIVER | Hospital: Sindh Institute of Urology & Transplantation (SIUT) | Type: Charity
+21-06-2025 02:36:55 | Patient: Shayan | Disease: LUNG | Hospital: Jinnah Hospital Pulmonology Unit | Type: Govt
