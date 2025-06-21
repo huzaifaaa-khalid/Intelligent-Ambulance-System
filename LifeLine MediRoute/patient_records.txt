@@ -6,3 +6,5 @@
 21-06-2025 03:44:42 | Patient: Shoaib | Disease: DENGUE | Hospital: National Institute of Health (NIH) | Type: Govt
 21-06-2025 03:46:21 | Patient: Chacha Ghafoor | Disease: DIABETES | Hospital: Aga Khan University Hospital (AKUH) | Type: Private | Bill: Rs 176267 (1 Lakh, 76 Thousand) | Consultation: Rs 9501, Tests: Rs 22938, Treatment: Rs 143828
 21-06-2025 04:13:28 | Patient: Mashhood | Disease: CARDIAC | Hospital: Aga Khan University Hospital (AKUH) | Type: Private | Bill: Rs 156820 (1 Lakh, 56 Thousand) | Consultation: Rs 8541, Tests: Rs 13164, Treatment: Rs 135115
+21-06-2025 16:06:57 | Patient: Usman | Disease: KIDNEY | Hospital: Pakistan Kidney & Liver Institute (PKLI) | Type: Semi-Govt
+21-06-2025 18:52:53 | Patient: Maaz | Disease: DENGUE | Hospital: National Institute of Health (NIH) | Type: Govt

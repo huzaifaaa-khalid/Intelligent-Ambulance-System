@@ -35,15 +35,15 @@ public class MediRouteService {
         System.out.println("Enter patient name:");
         String name = scanner.nextLine();
 
-        System.out.println("Enter patient disease (e.g., CARDIAC, CANCER, LIVER):");
-        String diseaseInput = scanner.nextLine().toUpperCase();
-
-        DiseaseCategory diseaseCategory;
-        try {
-            diseaseCategory = DiseaseCategory.valueOf(diseaseInput);
-        } catch (IllegalArgumentException e) {
-            System.out.println("❌ Invalid disease. Valid options are: " + Arrays.toString(DiseaseCategory.values()));
-            return;
+        DiseaseCategory diseaseCategory = null;
+        while (diseaseCategory == null) {
+            System.out.println("Enter patient disease (e.g., CARDIAC, CANCER, LIVER):");
+            String diseaseInput = scanner.nextLine().toUpperCase();
+            try {
+                diseaseCategory = DiseaseCategory.valueOf(diseaseInput);
+            } catch (IllegalArgumentException e) {
+                System.out.println("❌ Invalid disease. Please select a valid disease from: " + Arrays.toString(DiseaseCategory.values()));
+            }
         }
 
         String hospitalType;
@@ -58,7 +58,7 @@ public class MediRouteService {
             }
         }
 
-        Patient patient = new Patient(name, diseaseInput, "Patient");
+        Patient patient = new Patient(name, diseaseCategory.name(), "Patient");
 
         // 3. Generate hospitals and distances
         List<Hospital> hospitals = DataGenerator.generateHospitals();
